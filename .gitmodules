@@ -1,0 +1,6 @@
+[submodule "micropy/libs/MicroPython-ST7735"]
+	path = micropy/libs/MicroPython-ST7735
+	url = https://github.com/boochow/MicroPython-ST7735.git
+[submodule "micropy/libs/MicroPython"]
+	path = micropy/libs/MicroPython
+	url = https://github.com/GuyCarver/MicroPython.git

